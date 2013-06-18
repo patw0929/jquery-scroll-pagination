@@ -52,6 +52,12 @@
 				if (opts.afterLoad != null){
 					opts.afterLoad(objectsRendered);	
 				}
+
+				if ( $.trim(data).length == 0 ) {
+					if (opts.nomoreData != null){
+						opts.nomoreData();
+					}
+				}
 			  },
 			  dataType: 'html'
 		 });
@@ -79,9 +85,10 @@
  $.fn.scrollPagination.defaults = {
       	 'contentPage' : null,
      	 'contentData' : {},
-		 'beforeLoad': null,
-		 'afterLoad': null	,
-		 'scrollTarget': null,
-		 'heightOffset': 0		  
+     	 'beforeLoad': null,
+     	 'afterLoad': null,
+     	 'scrollTarget': null,
+     	 'heightOffset': 0,
+     	 'nomoreData': null
  };	
 })( jQuery );
