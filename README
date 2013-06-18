@@ -1,19 +1,5 @@
-Official post in my blog: http://www.andersonferminiano.com/blog/2012/07/jquery-scroll-pagination/
+Fork from https://github.com/andferminiano/jquery-scroll-pagination
 
-This jQuery Scroll Pagination Plugin was referred by several developer websites as:
-http://www.jqueryrain.com/2012/04/best-ajax-jquery-pagination-plugin-tutorial-with-example-demo/
-http://designsuperstars.net/10-cool-infinite-scrolling-effects-that-can-enhance-your-websites-navigation/
-http://www.webdeveloperjuice.com/2012/05/26/10-aggressively-used-jquery-infinite-scroll-plugins-for-endless-paging/
-http://social.technet.microsoft.com/Forums/el-GR/sharepoint2010programming/thread/c00d8727-5a83-437e-b88b-52372623ac57
-http://hi.baidu.com/isina/item/a8eaa72d7b8a519eb7326330
-http://freebiesdesign.com/infinite-scroll-jquery-plugin/
-http://simplythebest.net/scripts/cat/106/Data-handling.html
-http://www.htmldrive.net/items/show/1189/Useful-Scroll-Pagination-with-jQuery
-http://archive.cnblogs.com/a/2430967/
-http://thewebthought.blogspot.com/2012/01/jquery-loading-content-while-user.html
-
-
-Plugin URL: http://andersonferminiano.com/jqueryscrollpagination/
 Example of usage:
            $(function(){
                 $('#content').scrollPagination({
@@ -32,6 +18,9 @@ Example of usage:
                             $('#nomoreresults').fadeIn();
                             $('#content').stopScrollPagination();
                          }
+                    },
+                    'nomoreData': function () {
+                         $('#content').stopScrollPagination();
                     }
                 });
 
@@ -44,6 +33,34 @@ Example of usage:
                     });
                 };
 
+            });
+
+
+
+Example:
+
+            $('#loading').hide();
+
+            var year = document.getElementById('sYear').value;
+
+            $('#table-GrayGradient').scrollPagination({
+                'contentPage': "/Management/Resolution/", // the page where you are searching for results
+                'contentData': {}, // you can pass the children().size() to know where is the pagination
+                'scrollTarget': $(window), // who gonna scroll? in this example, the full window
+                'heightOffset': 10, // how many pixels before reaching end of the page would loading start? positives numbers only please
+                'beforeLoad': function () { // before load, some function, maybe display a preloader div
+                    window.page++;
+                    this.contentPage = "/Management/Resolution/?sPage=" + window.page + "&sYear=" + year;
+                    $('#loading').fadeIn();
+                },
+                'afterLoad': function (elementsLoaded) { // after loading, some function to animate results and hide a preloader div
+                    $('#loading').fadeOut();
+                    $(elementsLoaded).fadeInWithDelay();
+                    box_resizes();
+                },
+                'nomoreData': function () {
+                    $('#table-GrayGradient').stopScrollPagination();
+                }
             });
 
 
