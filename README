@@ -1,6 +1,14 @@
+jQuery Scroll Pagination
+====
+
 Fork from https://github.com/andferminiano/jquery-scroll-pagination
 
-Example of usage:
+
+***
+
+Example of usage
+---
+
            $(function(){
                 $('#content').scrollPagination({
                     'contentPage': 'democontent.html', // the url you are fetching the results
@@ -37,8 +45,8 @@ Example of usage:
 
 
 
-Example:
-
+Example
+---
             $('#loading').hide();
 
             var year = document.getElementById('sYear').value;
@@ -62,6 +70,17 @@ Example:
                     $('#table-GrayGradient').stopScrollPagination();
                 }
             });
+            
+            // code for fade in element by element
+            $.fn.fadeInWithDelay = function () {
+                var delay = 0;
+                return this.each(function () {
+                    $(this).delay(delay).animate({ opacity: 1 }, 200);
+                    delay += 100;
+                });
+            };
 
+
+***
 
 Thank you for using it!
